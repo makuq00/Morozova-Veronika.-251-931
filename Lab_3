@@ -1,0 +1,86 @@
+Задание 1.
+#include <iostream>
+#include <clocale>
+
+int main()
+{
+	setlocale(LC_ALL, "RUS");
+	int a = 31;
+	int* pointer;
+	pointer = &a;
+	std::cout << "адрес переменной:" << pointer << std::endl;
+	std::cout << "значение переменной:" << *pointer << std::endl;
+	*pointer = 67;
+	std::cout << "новое значение переменной:" << a << std::endl;
+
+	int aboba[] = { 42, 81, 0, 109, 9 };
+	for (int i = 0; i < 5; i++) {
+		std::cout << *(aboba + i) << " ";
+	};
+	std::cout << std::endl;
+	int b = 5;
+	int * const k = &b;
+	std::cout << *k << std::endl;
+	std::cout << k << std::endl;
+	*k = 45;
+	std::cout << b << std::endl;
+	std::cout << *k << std::endl;
+	std::cout << k << std::endl;
+
+}
+
+
+Задание 2.
+#include <iostream>
+#include <clocale>
+
+ int zxc(int *nach, int *kon) {
+	int sum = 0;
+	for (int* a = nach; a < kon; a++) {
+		sum = sum + *a;
+	}
+	return sum;
+}
+
+ int summm(int a, int b) {
+	 return a + b;
+ }
+
+
+ int razn(int a, int b) {
+	 return a - b;
+ }
+
+ int (*func(char operation))(int, int) {
+	 if (operation == '+') {
+		 return summm;
+	 }
+	 else {
+		 return razn;
+	 }
+
+
+ }
+
+
+int main()
+{
+	setlocale(LC_ALL, "RUS");
+	int aboba[] = { 42, 81, 67, 109, 9 };
+	int kolvo = sizeof(aboba) / sizeof(aboba[0]); //узнаем количество элементов в массиве 
+	std::cout << "сумма элементов массива:" << zxc(aboba, aboba + kolvo) << std::endl;
+
+	char operation;
+	std::cout << "введите знак (+ или -): ";
+	std::cin >> operation;
+	int (*a)(int, int) = func(operation); //создаем указатель на функцию где выбираем из двух функций по знаку
+	int w = 67;
+	int q = 52;
+	std::cout << "Ответ:" << a(w, q) << std::endl;
+
+	float* dinamic = new float; //динамический указатель (new - выделяем память в динамичекой области, float выделяем память для одного значения этого типа)
+	*dinamic = 123.45f;//записываем это число в выделенную память
+	std::cout << *dinamic << std::endl;
+	delete dinamic; //освобождаем выделенную память псоле завершения программы, т.к. она больше не нужна
+
+}
